@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home@</router-link> |
-      <router-link to="/about">About</router-link>
+      |
+      <router-link to="/">Home</router-link> |
+      <router-link to="/index">授業情報検索</router-link>|
+      <router-link to="/about">授業評価入力</router-link>|
+      <router-link to="/">掲示板(将来用)</router-link>|
     </div>
     <router-view />
   </div>
