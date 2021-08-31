@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import firebase from "firebase"
 let threds = [
   {
     ThredId: 0,
@@ -48,7 +49,9 @@ let threds = [
     time: "",
     FirstComment: "",
     Comments: [...Array(1000)].map((_, i) => ({
-      id: i + 1,
+      used: false,
+      CommentId: i + 1,
+      auther: "",
       time: "",
       text: "",
     })),
@@ -60,12 +63,13 @@ export default {
       threds: [
         // 仮データ
         {
-          ThredId: 1,
+          ThredId: 0,
           ThredTitle: "こはくくんかわいい",
           time: 20210829,
+          FirstCommenter: "はむちー",
           FirstComment: "こはくくんフィーチャー実装おめでとうございます。",
           Comments: [...Array(1000)].map((_, i) => ({
-            id: i + 1,
+            CommentId: i + 1,
             auther: "",
             time: "",
             text: "",
@@ -76,11 +80,12 @@ export default {
   },
   methods: {
     MakeThred() {
+      // 1番目のコメントはスレッド作成と同時に保存
       let request = new XMLHttpRequest()
       let now = new Date(request.getResponseHeader("Date"))
       firebase
         .firestore()
-        .collection("tweets")
+        .collection("threds")
         .add({
           ThredId: threds.length + 1,
           ThredTitle: "",
@@ -88,7 +93,23 @@ export default {
         })
     },
     OpenThred() {},
-    MakeComment() {},
+    MakeComment() {
+      // 2番目以降のコメントを保存
+      let request = new XMLHttpRequest()
+      let now = new Date(request.getResponseHeader("Date"))
+      for (let i = 1; i < 1000; i++) {
+        if (threds.Comments[i].used === false) {
+          threds.Comments.CommentId = i + 1
+          threds.Comments.used = true
+          threds.Comments.auther = ""
+          threds.Comments.time = now
+          threds.Comments.text = ""
+
+          firebase.firestore().collection("Comments").add(threds.Comments[i])
+          break
+        }
+      }
+    },
   },
 }
 </script>
