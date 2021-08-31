@@ -1,4 +1,4 @@
-// 表示用
+// 検索・表示用
 <template>
   <div>
     <div v-for="(comment, index) in lessons" v-bind:key="index" class="">

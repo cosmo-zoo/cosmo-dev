@@ -25,7 +25,7 @@
     </div>
     <div class="LessonName">
       教科名:
-      <input type="text" v-model="lesson" />
+      <input type="text" v-model="tytle" />
     </div>
     <!-- <span>Selected: {{ selectClass }}</span> -->
     <!-- <input type="" v-model="inputComment" /> -->
@@ -67,14 +67,19 @@ export default {
       inputComment: "",
 
       lessons: [
+        // 仮データ
         {
-          selectClass: "",
-          tytle: "線形代数",
-          Difficulty: "",
+          selectClass: "専門科目",
+          season: "前期",
+          tytle: "ES講座茨塾",
+          Difficulty: "★★★☆☆",
+          prof: "七種茨",
           test: true,
           report: false,
           admisson: false,
-          sonota: "",
+          sonota: false,
+          kijun: "",
+          comment: "",
         },
       ],
     }
@@ -85,6 +90,8 @@ export default {
         const lessons = [
           {
             selectClass: "",
+            season: "",
+            tytle: "",
             Difficulty: "",
             prof: "",
             test: "",
@@ -92,14 +99,16 @@ export default {
             admisson: "",
             sonota: "",
             kijun: "",
+            comment: "",
           },
         ]
         lessons.push(this.inputComment)
       }
     },
-  },
-  DeleteComment(index) {
-    this.todos.splice(index, 1)
+
+    DeleteComment(index) {
+      this.todos.splice(index, 1)
+    },
   },
 }
 </script>
