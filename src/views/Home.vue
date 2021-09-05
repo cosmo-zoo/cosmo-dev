@@ -15,6 +15,7 @@
             class="prompt"
             autocomplete="off"
             value=""
+            v-model="subject"
             required
           />
         </div>
@@ -25,13 +26,19 @@
           教員が複数人担当している場合や、不明な場合は空欄でかまいません。
         </div>
         <div class="ui icon input">
-          <input placeholder="例:山田真紀" type="text" value="" required />
+          <input
+            v-model="teacher"
+            placeholder="例:山田真紀"
+            type="text"
+            value=""
+            required
+          />
         </div>
       </div>
       <div class="field2">
         <label>科目区分</label>
         <div>
-          <select required>
+          <select required v-model="kamoku">
             <option value=""></option>
             <option value="全学部">全学共通科目&#40;教養科目含む&#41;</option>
             <option value="文学部">文学部専門科目</option>
@@ -44,7 +51,7 @@
       <div class="field3">
         <label>年度</label>
         <div>
-          <select>
+          <select v-model="year">
             <option value="2010">2010</option>
             <option value="2011">2011</option>
             <option value="2012">2012</option>
@@ -57,26 +64,17 @@
             <option value="2019">2019</option>
             <option value="2020">2020</option>
             <option value="2021" selected>2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-            <option value="2028">2028</option>
-            <option value="2029">2029</option>
-            <option value="2030">2030</option>
           </select>
         </div>
       </div>
       <div class="field4">
         <label>開講時期</label>
         <div>
-          <select required>
+          <select required v-model="season">
             <option value=""></option>
-            <option value="zenki">前期</option>
-            <option value="kouki">後期</option>
-            <option value="kouki">不定期</option>
+            <option value="前期">前期</option>
+            <option value="後期">後期</option>
+            <option value="不定期">不定期</option>
           </select>
         </div>
       </div>
@@ -86,35 +84,35 @@
           <input
             type="checkbox"
             id="report"
-            value="report"
+            value="レポート"
             v-model="checkedNames"
           />
           <label for="report">レポート</label>
           <input
             type="checkbox"
             id="attend"
-            value="attend"
+            value="出席"
             v-model="checkedNames"
           />
           <label for="attend">出席</label>
           <input
             type="checkbox"
             id="test"
-            value="test"
+            value="テスト"
             v-model="checkedNames"
           />
           <label for="test">テスト</label>
           <input
             type="checkbox"
             id="presentation"
-            value="presentation"
+            value="プレゼンテーション"
             v-model="checkedNames"
           />
           <label for="presentation">プレゼンテーション</label>
           <input
             type="checkbox"
             id="other"
-            value="other"
+            value="その他"
             v-model="checkedNames"
           />
           <label for="other">その他</label>
@@ -126,7 +124,7 @@
           <input
             type="radio"
             id="so-easy"
-            value="so-easy"
+            value="とても簡単"
             v-model="picked"
             name="nanido"
           />
@@ -134,7 +132,7 @@
           <input
             type="radio"
             id="easy"
-            value="easy"
+            value="簡単"
             v-model="picked"
             name="nanido"
           />
@@ -142,7 +140,7 @@
           <input
             type="radio"
             id="nomal"
-            value="nomal"
+            value="普通"
             v-model="picked"
             name="nanido"
           />
@@ -150,7 +148,7 @@
           <input
             type="radio"
             id="difficult"
-            value="difficult"
+            value="難しい"
             v-model="picked"
             name="nanido"
           />
@@ -158,7 +156,7 @@
           <input
             type="radio"
             id="so-difficult"
-            value="so-difficult"
+            value="とても難しい"
             v-model="picked"
             name="nanido"
           />
@@ -171,17 +169,67 @@
           名誉毀損や侮辱罪にあたる表現、過度に暴力的な表現、差別的な表現を禁じます。
         </div>
         <div>
-          <textarea placeholder="コメントを入力" rows="5"></textarea>
+          <textarea
+            v-model="text"
+            placeholder="コメントを入力"
+            rows="5"
+          ></textarea>
         </div>
       </div>
-      <button type="submit">送信</button>
+      <button v-on:click="submit">送信</button>
     </form>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue"
+import firebase from "firebase"
+export default {
+  data() {
+    return {
+      subject: "",
+      teacher: "",
+      kamoku: "",
+      year: "",
+      season: "",
+      checkedNames: [],
+      picked: [],
+      text: "",
+      information: [],
+    }
+  },
+  methods: {
+    submit() {
+      firebase.firestore().collection("user").add({
+        subject: this.subject,
+        teacher: this.teacher,
+        kamoku: this.kamoku,
+        year: this.year,
+        season: this.season,
+        checkedNames: this.checkedNames,
+        picked: this.picked,
+        text: this.text,
+      })
+    },
+  },
+  created: function () {
+    firebase
+      .firestore()
+      .collection("user")
+      .get()
+      .then((docs) => {
+        console.log("Document data:", docs.data())
+        if (docs.exists) {
+          docs.fotEach((doc) => {
+            this.information.push(doc.data())
+          })
+        }
+        console.log(this.information)
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error)
+      })
+  },
+}
 </script>
 
 <style scoped>
