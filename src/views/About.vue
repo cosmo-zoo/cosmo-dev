@@ -9,9 +9,9 @@
   <div class="Search">
     <header>
       <div class="title">Nalak</div>
-      <button id="search">検索</button>
+      <!-- <button id="search">検索</button>
       <button id="evaluation">評価</button>
-      <button id="login">ログイン</button>
+      <button id="login">ログイン</button> -->
     </header>
     <body>
       <button v-on:click="Show_Post" id="">授業検索</button>
