@@ -5,7 +5,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/index">授業情報検索</router-link>|
       <router-link to="/about">授業評価入力</router-link>|
-      <router-link to="/thred">掲示板</router-link>|
+      <router-link to="/thred">おたより</router-link>|
     </div>
     <router-view />
   </div>
