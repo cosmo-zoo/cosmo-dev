@@ -1,8 +1,12 @@
 <template>
   <div class="signup">
     <h1>アカウント登録</h1>
-    <input type="text" placeholder="ユーザー名" v-model="username" />
-    <input type="password" placeholder="パスワード" v-model="password" />
+    <div>
+      <input type="text" placeholder="ユーザー名" v-model="username" />
+    </div>
+    <div>
+      <input type="password" placeholder="パスワード" v-model="password" />
+    </div>
     <button v-on:click="signUp">登録</button>
     <p>
       <router-link to="/signin">サインインはこちらからできます</router-link>

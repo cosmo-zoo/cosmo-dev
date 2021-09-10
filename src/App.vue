@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/login">ログイン</router-link> |
+      <router-link to="/signup">サインアップ</router-link> |
+      <router-link to="/signin">サインイン</router-link> |
+      <router-link to="/success">ログイン成功</router-link> |
       <router-link to="/">講義評価</router-link> |
       <router-link to="/about">講義検索</router-link>
     </div>
