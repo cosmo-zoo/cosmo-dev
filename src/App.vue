@@ -1,9 +1,8 @@
 <template>
   <div>
     <div id="app">
-      <div v-if: id="nav">
-        |
-        <router-link to="/">Home</router-link> |
+      <div v-if="(isSignIn = true)" id="nav">
+        |<router-link to="/thred">掲示板</router-link>|
         <!-- <router-link to="/index">授業情報検索</router-link>|
         <router-link to="/about">授業評価入力</router-link>| -->
         <router-link to="/signin">ログイン</router-link>|
@@ -16,10 +15,20 @@
 export default {
   name: "Signin",
   data() {
-    return {
-      username: "",
-      password: "",
-    }
+    return (
+      {
+        username: "",
+        password: "",
+        isSignIn: false,
+      },
+      { username: "sawa", password: "hum", isSignIn: true }
+    )
+  },
+  created: function () {
+    // ログインしているかどうか判別 isSignInの結果を全部でやる
+    // if (this.isSignIn === true) {
+    // } else {
+    // }
   },
 }
 </script>

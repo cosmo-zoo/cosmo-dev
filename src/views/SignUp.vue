@@ -1,7 +1,7 @@
 <template>
   <div class="signup">
     <h1>アカウント登録</h1>
-    <input type="user" placeholder="ユーザー名" v-model="username" />
+    <input type="email" placeholder="メールアドレス" v-model="username" />
     <input type="password" placeholder="パスワード" v-model="password" />
     <button v-on:click="SignUp()" class="SignUp">登録</button>
     <p>
@@ -17,18 +17,19 @@ export default {
     return {
       username: "",
       password: "",
+      isSignIn: false,
     }
   },
   methods: {
-    SinUp: function () {
+    SignUp: function () {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.username, this.password)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .then(
-          (user) => {
-            alert("サインイン成功です。")
+          (accounts) => {
+            alert("アカウントが作成されました。")
             this.$router.push("/home")
-            console.log("success", user)
+            console.log("success", accounts)
           },
           (error) => {
             alert(error.message)

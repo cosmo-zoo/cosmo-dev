@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <div id="app">
-      <div v-if: id="nav">
+      <div id="nav">
         |
         <router-link to="/">Home</router-link> |
         <!-- <router-link to="/index">授業情報検索</router-link>|

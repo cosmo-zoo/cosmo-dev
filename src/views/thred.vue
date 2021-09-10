@@ -76,6 +76,7 @@ export default {
       auther: "",
       time: "",
       Comment: "",
+      keyword: "",
     }
   },
   methods: {
@@ -114,21 +115,22 @@ export default {
         alert("コメントしませんでした！")
       }
     },
-  },
-  SearchComment() {
-    // Declare variables
-    let c = 0
+    SearchComment() {
+      // Declare variables
+      // let c = 0
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (let i = 0; i < this.comments.length; i++) {
-      let key = this.comments.Comment
-      let n = key.indexOf(this.keyword, 0)
-      if (n !== -1) {
-        this.results[c] = this.comments[i]
-        c = c + 1
+      // Loop through all list items, and hide those who don't match the search query
+      for (let i = 0; i < this.comments.length; i++) {
+        let key = this.comments[i]
+        let n = key.Comment.indexOf(this.keyword, 0)
+        if (n !== -1) {
+          // this.results[c] = this.comments[i]
+          this.results.push(this.comments[i])
+        }
       }
-    }
+    },
   },
+
   created: function () {
     firebase
       .firestore()

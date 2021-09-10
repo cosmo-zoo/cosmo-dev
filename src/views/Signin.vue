@@ -19,10 +19,18 @@ import firebase from "firebase"
 export default {
   name: "Signin",
   data() {
-    return {
-      username: "",
-      password: "",
-    }
+    return [
+      {
+        username: "",
+        password: "",
+        isSignIn: false,
+      },
+      {
+        username: "sawa.may.29@gmail.com",
+        password: "humster",
+        isSignIn: false,
+      },
+    ]
   },
   methods: {
     signIn: function () {
@@ -30,10 +38,11 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)
         .then(
-          (user) => {
+          (accounts) => {
             alert("サインイン成功です。")
             this.$router.push("/home")
-            console.log("success", user)
+            console.log("success", accounts)
+            this.isSignIn = true
           },
           (error) => {
             alert(error.message)
