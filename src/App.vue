@@ -10,6 +10,8 @@
       <router-link to="/About"></router-link>
       <router-link to="/SignUp"></router-link>
       <router-link to="/SignIn"></router-link>
+      <!-- 掲示板 -->
+      <router-link to="/thred">A</router-link>
     </div>
     <router-view />
   </div>

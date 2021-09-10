@@ -18,7 +18,7 @@
         <button v-on:click="search" id="item">授業検索</button>
         <button v-on:click="eval" id="item">授業評価</button>
         <!-- 掲示板を導入する -->
-        <button>掲示板</button>
+        <button v-on:click="thred" id="item">掲示板</button>
       </div>
       <!-- 優先順位は低いよ -->
       <!--  -->
@@ -55,6 +55,11 @@ export default {
     home: function() {
       location.href = "Home";
     },
+    /*掲示板のページに飛ぶ関数*/
+    thred: function() {
+      location.href = "thred";
+    },
+
     /*新規登録ページに飛ぶ関数*/
     signup: function() {
       location.href = "SignUp";
@@ -83,6 +88,7 @@ img {
 }
 
 button {
+  font-family: "ヒラギノ丸ゴシック";
   display: inline-block;
   width: 180px;
   height: 40px;
@@ -102,8 +108,5 @@ button {
   -moz-border-radius: 50px;
   box-shadow: 0px 0px 0px 4px rgb(7, 17, 17);
   transition: all 0.5s ease;
-}
-button:hover {
-  color: beige;
 }
 </style>
