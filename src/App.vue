@@ -1,15 +1,28 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      |
-      <router-link to="/">Home</router-link> |
-      <router-link to="/index">授業情報検索</router-link>|
-      <router-link to="/about">授業評価入力</router-link>|
-      <router-link to="/thred">おたより</router-link>|
+  <div>
+    <div id="app">
+      <div v-if: id="nav">
+        |
+        <router-link to="/">Home</router-link> |
+        <!-- <router-link to="/index">授業情報検索</router-link>|
+        <router-link to="/about">授業評価入力</router-link>| -->
+        <router-link to="/signin">ログイン</router-link>|
+      </div>
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>
+<script>
+export default {
+  name: "Signin",
+  data() {
+    return {
+      username: "",
+      password: "",
+    }
+  },
+}
+</script>
 
 <style>
 #app {

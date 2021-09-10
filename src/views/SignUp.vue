@@ -1,23 +1,18 @@
 <template>
-  <div class="signin">
-    <h1>サインイン</h1>
-    <input type="text" placeholder="ユーザ名" v-model="username" />
+  <div class="signup">
+    <h1>アカウント登録</h1>
+    <input type="user" placeholder="ユーザー名" v-model="username" />
     <input type="password" placeholder="パスワード" v-model="password" />
-    <button @click="signIn">サインイン</button>
+    <button v-on:click="SignUp()" class="SignUp">登録</button>
     <p>
-      アカウント登録はしましたか? <br />
-      <router-link to="/signup"
-        >ここをクリックしてアカウント登録をしてください</router-link
-      >
+      <router-link to="/signin">サインインはこちらからできます</router-link>
     </p>
   </div>
 </template>
-
 <script>
 import firebase from "firebase"
-
 export default {
-  name: "Signin",
+  name: "Signup",
   data() {
     return {
       username: "",
@@ -25,7 +20,7 @@ export default {
     }
   },
   methods: {
-    signIn: function () {
+    SinUp: function () {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.username, this.password)

@@ -62,7 +62,6 @@
       <div class="Comment">{{ comment.Comment }}</div>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -71,7 +70,7 @@ export default {
   data() {
     return {
       comments: [],
-      result: [],
+      results: [],
       CommentId: "",
       Title: "",
       auther: "",
@@ -87,15 +86,14 @@ export default {
         now.getMonth() + 1
       }/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
       const id = this.comments.length
-      const number = String(id)
       const res = confirm("投稿しても大丈夫？")
       if (res === true) {
         firebase
           .firestore()
           .collection("comments")
-          .doc(id)
-          .set({
-            CommentId: number,
+          .doc()
+          .add({
+            CommentId: id,
             Title: this.Title,
             auther: this.auther,
             time: Time,
@@ -124,9 +122,9 @@ export default {
     // Loop through all list items, and hide those who don't match the search query
     for (let i = 0; i < this.comments.length; i++) {
       let key = this.comments.Comment
-      let n = key.indexOf(this.keyword)
+      let n = key.indexOf(this.keyword, 0)
       if (n !== -1) {
-        this.result[c] = this.comments[i]
+        this.results[c] = this.comments[i]
         c = c + 1
       }
     }
