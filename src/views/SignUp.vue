@@ -1,7 +1,7 @@
 <template>
   <div class="signup">
     <h1>アカウント登録</h1>
-    <input type="email" placeholder="メールアドレス" v-model="username" />
+    <input type="email" placeholder="ユーザー名" v-model="email" />
     <input type="password" placeholder="パスワード" v-model="password" />
     <button v-on:click="SignUp()" class="SignUp">登録</button>
     <p>
@@ -15,7 +15,7 @@ export default {
   name: "Signup",
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
       isSignIn: false,
     }

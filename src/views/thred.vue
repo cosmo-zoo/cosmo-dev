@@ -1,11 +1,19 @@
 // 掲示板
 <template>
-  <div>
+  <div v-if="(isSignIn = true)">
     <div class="header">
       <div>ひとの わるぐちは かかないでね</div>
       <div>こじんが とくてい される ような ことは かかないでね</div>
     </div>
     <div class="Make">
+      <!-- ここからたぬきが乱入 -->
+      <div id="container">
+        <button v-on:click="home" id="item">ホーム</button>
+        <button v-on:click="search" id="item">授業検索</button>
+        <button v-on:click="eval" id="item">授業評価</button>
+        <!-- 掲示板を導入する -->
+        <button v-on:click="thred" id="item">掲示板</button>
+      </div>
       <input
         type="text"
         class="inTitle"
@@ -80,6 +88,31 @@ export default {
     }
   },
   methods: {
+    /*ホームに飛ぶ関数*/
+    home: function () {
+      location.href = "Home"
+    },
+    /*掲示板のページに飛ぶ関数*/
+    thred: function () {
+      location.href = "thred"
+    },
+
+    /*新規登録ページに飛ぶ関数*/
+    signup: function () {
+      location.href = "SignUp"
+    },
+    /*ログインページに飛ぶ関数*/
+    login: function () {
+      location.href = "SignIn"
+    },
+    /*検索ページに飛ぶ関数*/
+    search: function () {
+      location.href = "About"
+    },
+    /*評価ページに飛ぶ関数*/
+    eval: function () {
+      location.href = "About"
+    },
     MakeComment() {
       // OKなら移動
       const now = firebase.firestore.Timestamp.now()
@@ -156,80 +189,134 @@ export default {
 </script>
 
 <style scoped>
+button {
+  font-family: "ヒラギノ丸ゴシック";
+  display: inline-block;
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  margin: 12px;
+  padding: 1px;
+
+  background: rgb(7, 17, 17);
+  text-align: center;
+  align-content: center;
+  border: 1px solid #dee2ce;
+  color: #dee2ce;
+  font-size: 100%;
+
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  box-shadow: 0px 0px 0px 4px rgb(7, 17, 17);
+  transition: all 0.5s ease;
+}
+
 .Make {
-  padding: 0.5em 1em;
-  margin: 10% 10%;
-  width: 80%;
-  background: pink; /*背景色*/
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  margin-left: 100px;
+  margin-right: 100px;
+  background: rgba(7, 17, 17, 0.295); /*背景色*/
 }
-.Make p {
-  margin: 0;
-  padding: 0;
+
+.title-auther {
+  display: flex;
+  justify-content: center;
 }
+
 .inTitle {
-  margin: 1%;
-  width: 50%;
+  color: rgb(7, 17, 17);
+  margin: 25px;
+  justify-content: center;
+  height: 30px;
+  width: 70%;
 }
 .inAuther {
-  margin: 1%;
-  width: 50%;
+  color: rgb(7, 17, 17);
+  margin: 25px;
+  justify-content: center;
+  height: 30px;
+  width: 70%;
 }
 .inComment {
-  margin: 1%;
-  width: 50%;
+  justify-content: center;
+  color: rgb(7, 17, 17);
+  margin: 25px;
+  height: 300px;
+  width: 70%;
 }
+
+.inWord {
+  margin: 25px;
+  height: 30px;
+  width: 300px;
+}
+
+.searchComment {
+  color: #dee2ce;
+  margin-top: 50px;
+  width: 300px;
+}
+
 .MakeComment {
-  margin: 1%;
-  width: 50%;
+  color: #dee2ce;
+  margin-top: 50px;
+  width: 300px;
 }
 .CommentBox {
-  margin: 10%;
-  width: 80%;
-  background: #223a70;
-  box-shadow: 0 2% 4% black;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  align-content: center;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  padding: 5%;
+  margin-left: 100px;
+  margin-right: 100px;
+  background: rgba(7, 17, 17, 0.295);
 }
 .CommentBox .info {
-  color: #223a70;
-  margin: 0;
+  color: rgb(7, 17, 17);
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 5%;
-  margin-bottom: 0%;
   width: 80%;
   padding: 5%;
-  background: rgb(252, 244, 234);
+  background-color: whitesmoke;
 }
 .CommentBox .Comment {
-  color: #223a70;
+  color: rgb(7, 17, 17);
+  font-family: "ヒラギノ丸ゴシック";
   margin: 10%;
   margin-top: 5%;
   margin-bottom: 5%;
   padding: 5%;
   width: 80%;
-  background: rgb(252, 244, 234);
+  background-color: whitesmoke;
 }
 .CommentBox .info .id {
+  font-family: "ヒラギノ丸ゴシック";
   margin: 0;
   display: inline-block;
   text-align: left;
   width: 10%;
 }
 .CommentBox .info .Title {
+  font-family: "ヒラギノ丸ゴシック";
   margin: 0;
   display: inline-block;
   text-align: center;
   width: 70%;
 }
 .CommentBox .info .auther {
+  font-family: "ヒラギノ丸ゴシック";
   margin: 0%;
   text-align: center;
   width: 80%;
 }
 .CommentBox .info .time {
+  font-family: "ヒラギノ丸ゴシック";
   margin: 0%;
   text-align: left;
   width: 80%;
