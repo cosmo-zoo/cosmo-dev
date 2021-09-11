@@ -1,7 +1,10 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import Home from "../views/Home.vue"
-import Success from "../views/Success.vue"
+import About from "../views/About.vue"
+import Signin from "../views/Signin.vue"
+import Signup from "../views/Signup.vue"
+import thred from "../views/thred.vue"
 
 Vue.use(VueRouter)
 
@@ -14,30 +17,12 @@ const routes = [
   {
     path: "/about",
     name: "About",
-    component: () => import("../views/About.vue"),
+    component: About,
   },
   {
     path: "/thred",
     name: "thred",
-    component: () => import("../views/thred.vue"),
-  },
-];
-  {
-    path: "/success",
-    name: "Success",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: Success,
-  },
-  {
-    path: "/thred",
-    name: "Thred",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "thred" */ "../views/thred.vue"),
+    component: thred,
   },
   {
     path: "/signin",
@@ -45,8 +30,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Signin.vue"),
+    component: Signin,
   },
   {
     path: "/signup",
@@ -54,8 +38,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/SignUp.vue"),
+    component: Signup,
   },
 ]
 
@@ -64,4 +47,3 @@ const router = new VueRouter({
 })
 
 export default router
-

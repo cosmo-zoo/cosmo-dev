@@ -1,258 +1,65 @@
 <template>
-
   <!--サインイン後のホーム画面-->
   <div class="Home">
+    <img v-bind:href="imgPath" src="@/assets/img/logo.png" alt="logo" />
 
-      <img v-bind:href="imgPath" src="@/assets/img/logo.png" alt="logo" />
-
-      <div id="container">
-        <!-- <button v-on:click="home" id="item">ホーム</button> -->
-        <button v-on:click="search" id="item">授業検索</button>
-        <button v-on:click="eval" id="item">授業評価</button>
-        <!-- 掲示板を導入する -->
-        <button v-on:click="thred" id="item">掲示板</button>
-      </div>
-      <!-- 優先順位は低いよ -->
-      <!--  -->
-      <!-- <div>新着授業評価情報</div> -->
- 
-  <div class="hyotei">
-    <div class="ui-container">
-      <div class="ui header">
-        <!-- <div class="content">授業を評定する</div> -->
-        <div class="sub-header">できる限り正確な情報を記載してください。</div>
-      </div>
-      <form class="ui form">
-        <div class="field0">
-          <label class="required">講義名</label>
-          <div class="ui icon input">
-            <input
-              placeholder="例：奈良女子大学入門"
-              type="text"
-              tabindex="0"
-              class="prompt"
-              autocomplete="off"
-              value=""
-              v-model="subject"
-              autofocus
-              required
-            />
-          </div>
-        </div>
-        <div class="field1">
-          <label class="no-required">教員名</label>
-          <div class="important-point">
-            ※教員が複数人担当している場合や、不明な場合は空欄でかまいません。
-          </div>
-          <div class="ui icon input">
-            <input
-              v-model="teacher"
-              placeholder="例:山田真紀"
-              type="text"
-              value=""
-              autofocus
-              class="prompt"
-            />
-          </div>
-        </div>
-
-        <div class="field2">
-          <label class="required">科目区分</label>
-          <div class="m-form-select">
-            <select required v-model="kamoku" autofocus>
-              <option value=""></option>
-              <option value="全学部">全学共通科目</option>
-              <option value="文学部">文学部専門科目</option>
-              <option value="理学部">理学部専門科目</option>
-              <option value="生活環境学部">生活環境学部専門科目</option>
-              <option value="その他">その他・不明</option>
-            </select>
-          </div>
-        </div>
-        <div class="year-season">
-          <div class="field3">
-            <label class="required">年度</label>
-            <div class="m-form-select2">
-              <select v-model="year" autofocus>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021" selected>2021</option>
-              </select>
-            </div>
-          </div>
-          <div class="field4">
-            <label class="required">開講時期</label>
-            <div class="m-form-select2">
-              <select required v-model="season" autofocus>
-                <option value=""></option>
-                <option value="前期">前期</option>
-                <option value="後期">後期</option>
-                <option value="不定期">不定期</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="field5">
-          <label class="required">採点方法</label>
-          <div class="saiten">
-            <input
-              type="checkbox"
-              id="report"
-              value="レポート"
-              v-model="checkedNames"
-              autofocus
-            />
-            <label for="report">レポート</label>
-            <input
-              type="checkbox"
-              id="attend"
-              value="出席"
-              v-model="checkedNames"
-              autofocus
-            />
-            <label for="attend">出席</label>
-            <input
-              type="checkbox"
-              id="test"
-              value="テスト"
-              v-model="checkedNames"
-              autofocus
-            />
-            <label for="test">テスト</label>
-            <input
-              type="checkbox"
-              id="presentation"
-              value="プレゼンテーション"
-              v-model="checkedNames"
-              autofocus
-            />
-            <label for="presentation">プレゼンテーション</label>
-            <input
-              type="checkbox"
-              id="other"
-              value="その他"
-              v-model="checkedNames"
-              autofocus
-            />
-            <label for="other">その他</label>
-          </div>
-        </div>
-        <div class="field6">
-          <label class="required">単位取得難易度</label>
-          <div>
-            <input
-              type="radio"
-              id="so-easy"
-              value="とても簡単"
-              v-model="picked"
-              name="nanido"
-              autofocus
-            />
-            <label for="so-easy">とても簡単</label>
-            <input
-              type="radio"
-              id="easy"
-              value="簡単"
-              v-model="picked"
-              name="nanido"
-              autofocus
-            />
-            <label for="easy">簡単</label>
-            <input
-              type="radio"
-              id="nomal"
-              value="普通"
-              v-model="picked"
-              name="nanido"
-              autofocus
-            />
-            <label for="nomal">普通</label>
-            <input
-              type="radio"
-              id="difficult"
-              value="難しい"
-              v-model="picked"
-              name="nanido"
-              autofocus
-            />
-            <label for="difficult">難しい</label>
-            <input
-              type="radio"
-              id="so-difficult"
-              value="とても難しい"
-              v-model="picked"
-              name="nanido"
-              autofocus
-            />
-            <label for="so-difficult">とても難しい</label>
-          </div>
-        </div>
-        <div class="field7">
-          <label class="no-required">コメント</label>
-          <div class="important-point">
-            名誉毀損や侮辱罪にあたる表現、過度に暴力的な表現、差別的な表現を禁じます。
-          </div>
-          <div>
-            <textarea
-              v-model="text"
-              placeholder="コメントを入力"
-              rows="5"
-              autofocus
-              class="m-form-textarea"
-            ></textarea>
-          </div>
-        </div>
-        <button v-on:click="submit" class="form-submit-button">送信</button>
-      </form>
+    <div id="container">
+      <!-- <button v-on:click="home" id="item">ホーム</button> -->
+      <button id="item">授業検索</button>
+      <button id="item">授業評価</button>
+      <!-- 掲示板を導入する -->
+      <button v-on:click="thred" id="item">掲示板</button>
     </div>
-    <div class="about">
-      <div class="ui header">
-        <!-- <div class="content">授業を検索する</div> -->
-        <div class="sub header">
-          講義情報が得られない時は、掲示板などで質問してみましょう。
+    <!-- 優先順位は低いよ -->
+    <!--  -->
+    <!-- <div>新着授業評価情報</div> -->
+
+    <div class="hyotei">
+      <div class="ui-container">
+        <div class="ui header">
+          <!-- <div class="content">授業を評定する</div> -->
+          <div class="sub-header">できる限り正確な情報を記載してください。</div>
         </div>
-      </div>
-      <form>
-        <div class="search">
-          <div>
-            <label class="label1">講義名・教師名から探す</label>
+        <form class="ui form">
+          <div class="field0">
+            <label class="required">講義名</label>
+            <div class="ui icon input">
+              <input
+                placeholder="例：奈良女子大学入門"
+                type="text"
+                tabindex="0"
+                class="prompt"
+                autocomplete="off"
+                value=""
+                v-model="subject"
+                autofocus
+                required
+              />
+            </div>
           </div>
-          <input
-            type="text"
-            name="q"
-            size="31"
-            maxlength="255"
-            value=""
-            class="prompt"
-            placeholder="キーワード入力"
-            v-model="kennsaku"
-          />
-          <button type="submit" class="Box-Btn" name="" v-on:click="kennsaku2">
-            検索
-          </button>
-        </div>
-      </form>
-      <form>
-        <div class="search2">
-          <p></p>
-          <label class="label2">条件検索</label>
+          <div class="field1">
+            <label class="no-required">教員名</label>
+            <div class="important-point">
+              ※教員が複数人担当している場合や、不明な場合は空欄でかまいません。
+            </div>
+            <div class="ui icon input">
+              <input
+                v-model="teacher"
+                placeholder="例:山田真紀"
+                type="text"
+                value=""
+                autofocus
+                class="prompt"
+              />
+            </div>
+          </div>
+
           <div class="field2">
-            <label>科目区分</label>
+            <label class="required">科目区分</label>
             <div class="m-form-select">
-              <select>
+              <select required v-model="kamoku" autofocus>
                 <option value=""></option>
-                <option value="全学部">
-                  全学共通科目&#40;教養科目含む&#41;
-                </option>
+                <option value="全学部">全学共通科目</option>
                 <option value="文学部">文学部専門科目</option>
                 <option value="理学部">理学部専門科目</option>
                 <option value="生活環境学部">生活環境学部専門科目</option>
@@ -260,108 +67,304 @@
               </select>
             </div>
           </div>
-          <div class="field4">
-            <label>開講時期</label>
-            <div class="m-form-select">
-              <select>
-                <option value=""></option>
-                <option value="zenki">前期</option>
-                <option value="kouki">後期</option>
-                <option value="kouki">不定期</option>
-              </select>
+          <div class="year-season">
+            <div class="field3">
+              <label class="required">年度</label>
+              <div class="m-form-select2">
+                <select v-model="year" autofocus>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021" selected>2021</option>
+                </select>
+              </div>
+            </div>
+            <div class="field4">
+              <label class="required">開講時期</label>
+              <div class="m-form-select2">
+                <select required v-model="season" autofocus>
+                  <option value=""></option>
+                  <option value="前期">前期</option>
+                  <option value="後期">後期</option>
+                  <option value="不定期">不定期</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="field5">
-            <label>採点方法</label>
+            <label class="required">採点方法</label>
             <div class="saiten">
               <input
                 type="checkbox"
                 id="report"
-                value="report"
+                value="レポート"
                 v-model="checkedNames"
+                autofocus
               />
               <label for="report">レポート</label>
               <input
                 type="checkbox"
                 id="attend"
-                value="attend"
+                value="出席"
                 v-model="checkedNames"
+                autofocus
               />
               <label for="attend">出席</label>
               <input
                 type="checkbox"
                 id="test"
-                value="test"
+                value="テスト"
                 v-model="checkedNames"
+                autofocus
               />
               <label for="test">テスト</label>
               <input
                 type="checkbox"
                 id="presentation"
-                value="presentation"
+                value="プレゼンテーション"
                 v-model="checkedNames"
+                autofocus
               />
               <label for="presentation">プレゼンテーション</label>
               <input
                 type="checkbox"
                 id="other"
-                value="other"
+                value="その他"
                 v-model="checkedNames"
+                autofocus
               />
               <label for="other">その他</label>
             </div>
           </div>
           <div class="field6">
-            <label>単位取得難易度</label>
+            <label class="required">単位取得難易度</label>
             <div>
               <input
                 type="radio"
                 id="so-easy"
-                value="so-easy"
+                value="とても簡単"
                 v-model="picked"
                 name="nanido"
+                autofocus
               />
               <label for="so-easy">とても簡単</label>
               <input
                 type="radio"
                 id="easy"
-                value="easy"
+                value="簡単"
                 v-model="picked"
                 name="nanido"
+                autofocus
               />
               <label for="easy">簡単</label>
               <input
                 type="radio"
                 id="nomal"
-                value="nomal"
+                value="普通"
                 v-model="picked"
                 name="nanido"
+                autofocus
               />
               <label for="nomal">普通</label>
               <input
                 type="radio"
                 id="difficult"
-                value="difficult"
+                value="難しい"
                 v-model="picked"
                 name="nanido"
+                autofocus
               />
               <label for="difficult">難しい</label>
               <input
                 type="radio"
                 id="so-difficult"
-                value="so-difficult"
+                value="とても難しい"
                 v-model="picked"
                 name="nanido"
+                autofocus
               />
               <label for="so-difficult">とても難しい</label>
             </div>
           </div>
-          <button type="kennsaku" class="Box-Btn">検索</button>
+          <div class="field7">
+            <label class="no-required">コメント</label>
+            <div class="important-point">
+              名誉毀損や侮辱罪にあたる表現、過度に暴力的な表現、差別的な表現を禁じます。
+            </div>
+            <div>
+              <textarea
+                v-model="text"
+                placeholder="コメントを入力"
+                rows="5"
+                autofocus
+                class="m-form-textarea"
+              ></textarea>
+            </div>
+          </div>
+          <button v-on:click="submit" class="form-submit-button">送信</button>
+        </form>
+      </div>
+      <div class="about">
+        <div class="ui header">
+          <!-- <div class="content">授業を検索する</div> -->
+          <div class="sub header">
+            講義情報が得られない時は、掲示板などで質問してみましょう。
+          </div>
         </div>
-      </form>
-    </div>
-    <div>
-      <!-- <div class="result">新着情報</div>
+        <form>
+          <div class="search">
+            <div>
+              <label class="label1">講義名・教師名から探す</label>
+            </div>
+            <input
+              type="text"
+              name="q"
+              size="31"
+              maxlength="255"
+              value=""
+              class="prompt"
+              placeholder="キーワード入力"
+              v-model="kennsaku"
+            />
+            <button
+              type="submit"
+              class="Box-Btn"
+              name=""
+              v-on:click="kennsaku2"
+            >
+              検索
+            </button>
+          </div>
+        </form>
+        <form>
+          <div class="search2">
+            <p></p>
+            <label class="label2">条件検索</label>
+            <div class="field2">
+              <label>科目区分</label>
+              <div class="m-form-select">
+                <select>
+                  <option value=""></option>
+                  <option value="全学部">
+                    全学共通科目&#40;教養科目含む&#41;
+                  </option>
+                  <option value="文学部">文学部専門科目</option>
+                  <option value="理学部">理学部専門科目</option>
+                  <option value="生活環境学部">生活環境学部専門科目</option>
+                  <option value="その他">その他・不明</option>
+                </select>
+              </div>
+            </div>
+            <div class="field4">
+              <label>開講時期</label>
+              <div class="m-form-select">
+                <select>
+                  <option value=""></option>
+                  <option value="zenki">前期</option>
+                  <option value="kouki">後期</option>
+                  <option value="kouki">不定期</option>
+                </select>
+              </div>
+            </div>
+            <div class="field5">
+              <label>採点方法</label>
+              <div class="saiten">
+                <input
+                  type="checkbox"
+                  id="report"
+                  value="report"
+                  v-model="checkedNames"
+                />
+                <label for="report">レポート</label>
+                <input
+                  type="checkbox"
+                  id="attend"
+                  value="attend"
+                  v-model="checkedNames"
+                />
+                <label for="attend">出席</label>
+                <input
+                  type="checkbox"
+                  id="test"
+                  value="test"
+                  v-model="checkedNames"
+                />
+                <label for="test">テスト</label>
+                <input
+                  type="checkbox"
+                  id="presentation"
+                  value="presentation"
+                  v-model="checkedNames"
+                />
+                <label for="presentation">プレゼンテーション</label>
+                <input
+                  type="checkbox"
+                  id="other"
+                  value="other"
+                  v-model="checkedNames"
+                />
+                <label for="other">その他</label>
+              </div>
+            </div>
+            <div class="field6">
+              <label>単位取得難易度</label>
+              <div>
+                <input
+                  type="radio"
+                  id="so-easy"
+                  value="so-easy"
+                  v-model="picked"
+                  name="nanido"
+                />
+                <label for="so-easy">とても簡単</label>
+                <input
+                  type="radio"
+                  id="easy"
+                  value="easy"
+                  v-model="picked"
+                  name="nanido"
+                />
+                <label for="easy">簡単</label>
+                <input
+                  type="radio"
+                  id="nomal"
+                  value="nomal"
+                  v-model="picked"
+                  name="nanido"
+                />
+                <label for="nomal">普通</label>
+                <input
+                  type="radio"
+                  id="difficult"
+                  value="difficult"
+                  v-model="picked"
+                  name="nanido"
+                />
+                <label for="difficult">難しい</label>
+                <input
+                  type="radio"
+                  id="so-difficult"
+                  value="so-difficult"
+                  v-model="picked"
+                  name="nanido"
+                />
+                <label for="so-difficult">とても難しい</label>
+              </div>
+            </div>
+            <button type="kennsaku" class="Box-Btn">検索</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <!-- <div class="result">新着情報</div>
       <div
         v-for="(information, index) in information"
         :key="index"
@@ -377,26 +380,27 @@
           コメント：{{ information.text }}
         </p>
       </div> -->
+      </div>
+      <div class="result">検索結果</div>
+      <div
+        v-for="(information2, index) in information2"
+        :key="index"
+        class="information2box"
+      >
+        <div>{{ information2.subject }}</div>
+        <p>
+          教員名：{{ information2.teacher }}<br />
+          科目区分：{{ information2.kamoku }}<br />
+          年度/開講時期：{{ information2.year }}/{{ information2.season }}<br />
+          採点方法：{{ information2.checkedNames }}<br />
+          単位取得難易度：{{ information2.picked }}<br />
+          コメント：{{ information2.text }}
+        </p>
+      </div>
+      <footer>
+        <p>copyright 2021 cosmo-zoo</p>
+      </footer>
     </div>
-    <div class="result">検索結果</div>
-    <div
-      v-for="(information2, index) in information2"
-      :key="index"
-      class="information2box"
-    >
-      <div>{{ information2.subject }}</div>
-      <p>
-        教員名：{{ information2.teacher }}<br />
-        科目区分：{{ information2.kamoku }}<br />
-        年度/開講時期：{{ information2.year }}/{{ information2.season }}<br />
-        採点方法：{{ information2.checkedNames }}<br />
-        単位取得難易度：{{ information2.picked }}<br />
-        コメント：{{ information2.text }}
-      </p>
-    </div>
-    <footer>
-      <p>copyright 2021 cosmo-zoo</p>
-    </footer>
   </div>
 </template>
 
@@ -459,41 +463,41 @@ export default {
           console.log(docs)
         })
     },
-     /*ボタンの色変更*/
-    color1: function() {
-      document.bgColor = "rgb(7, 17, 17)";
-      document.fgColor = "#dee2ce";
+    /*ボタンの色変更*/
+    color1: function () {
+      document.bgColor = "rgb(7, 17, 17)"
+      document.fgColor = "#dee2ce"
     },
-    color2: function() {
-      document.bgColor = "rgb(7, 17, 17,50)";
-      document.fgColor = "#dee2ce";
+    color2: function () {
+      document.bgColor = "rgb(7, 17, 17,50)"
+      document.fgColor = "#dee2ce"
     },
 
     /*ホームに飛ぶ関数*/
-    home: function() {
-      location.href = "Home";
+    home: function () {
+      location.href = "Home"
     },
     /*掲示板のページに飛ぶ関数*/
-    thred: function() {
-      location.href = "thred";
+    thred: function () {
+      this.$router.push({ path: "/thred" })
     },
 
     /*新規登録ページに飛ぶ関数*/
-    signup: function() {
-      location.href = "SignUp";
+    signup: function () {
+      location.href = "SignUp"
     },
     /*ログインページに飛ぶ関数*/
-    login: function() {
-      location.href = "SignIn";
+    login: function () {
+      location.href = "SignIn"
     },
     /*検索ページに飛ぶ関数*/
-    search: function() {
-      location.href = "About";
-    },
+    // search: function () {
+    //   location.href = "About"
+    // },
     /*評価ページに飛ぶ関数*/
-    eval: function() {
-      location.href = "About";
-    },
+    // eval: function () {
+    //   location.href = "About"
+    // },
   },
   created: function () {
     firebase
@@ -819,7 +823,7 @@ export default {
 }
 .Box-Btn:active {
   background: #2e2e2e; /* 濃い緑色 */
- }
+}
 img {
   width: 300px;
   height: 120px;
@@ -846,4 +850,5 @@ button {
   -moz-border-radius: 50px;
   box-shadow: 0px 0px 0px 4px rgb(7, 17, 17);
   transition: all 0.5s ease;
+}
 </style>

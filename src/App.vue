@@ -1,27 +1,28 @@
 <template>
-  <div>
-    <div v-if="(isSignIn = true)" id="app">
+  <div id="app">
+    <router-view />
+    <router-link to="/Home"></router-link>
+    <router-link to="/About"></router-link>
+    <router-link to="/SignUp"></router-link>
+    <router-link to="/signin"></router-link>
+    <router-link to="/thred"></router-link>
+    <div v-if="(isSignIn = true)">
       <div id="nav">
-        welcome to NARAK
-        <p>Click to Start</p>
-      </router-link>
-      <router-link to="/Home"></router-link>
-      <router-link to="/About"></router-link>
-      <router-link to="/SignUp"></router-link>
-      <router-link to="/signin"></router-link>
-      <router-link to="/thred"></router-link>
+        <router-link to="/Home">
+          welcome to NARAK
+          <p>Click to Start</p>
+        </router-link>
       </div>
-      <router-view />
     </div>
     <div v-else>
       <div>ログインしてください</div>
       <router-link to="/signin">ログイン画面はこちら</router-link>
-
+    </div>
   </div>
 </template>
 <script>
 export default {
-  name: "Signin",
+  name: "App",
   data() {
     return (
       {
@@ -41,10 +42,7 @@ export default {
 }
 </script>
 
-
 =======
-
-
 
 <style>
 #app {
