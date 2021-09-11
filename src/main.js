@@ -1,12 +1,8 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import firebase from "firebase";
-// import "firebase/firestore";
-// import "firebase/auth";
-
+import Vue from "vue"
+import App from "./App.vue"
+import router from "./router"
+import "./firebase.js"
 Vue.config.productionTip = false;
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCZXWQvko8taTmipnbg43HXKWRWLfpsYeQ",
@@ -48,4 +44,4 @@ firebase.initializeApp(firebaseConfig);
 new Vue({
   router,
   render: (h) => h(App),
-}).$mount("#app");
+}).$mount("#app")

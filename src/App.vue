@@ -1,11 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/About">Search</router-link> |
-      <router-link to="/SignUp">SignUp</router-link> |
-      <router-link to="/SignIn">SignIn</router-link> | -->
 
+  
       <router-link to="/Home">
         welcome to NARAK
         <p>Click to Start</p>
@@ -14,12 +11,22 @@
       <router-link to="/About"></router-link>
       <router-link to="/SignUp"></router-link>
       <router-link to="/SignIn"></router-link>
-      <!-- 掲示板 -->
       <router-link to="/thred"></router-link>
+=======
+   
+      <router-link to="/success">ログイン成功</router-link> |
+      <router-link to="/">講義評価</router-link> |
+      
+
     </div>
     <router-view />
   </div>
 </template>
+
+
+=======
+
+
 
 <style>
 #app {

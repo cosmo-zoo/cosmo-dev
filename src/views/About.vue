@@ -1,9 +1,3 @@
-<!---<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>--->
-
 <template>
   <!--授業検索-->
   <div class="Search">
