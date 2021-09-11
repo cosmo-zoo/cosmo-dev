@@ -1,11 +1,14 @@
 // 掲示板
 <template>
+
   <div v-if="(isSignIn = true)">
+
     <div class="header">
       <div>ひとの わるぐちは かかないでね</div>
       <div>こじんが とくてい される ような ことは かかないでね</div>
     </div>
     <div class="Make">
+
       <!-- ここからたぬきが乱入 -->
       <div id="container">
         <button v-on:click="home" id="item">ホーム</button>
@@ -26,16 +29,19 @@
         v-model="auther"
         placeholder="かいたひと"
       />
+
       <textarea
         type="text"
         class="inComment"
         v-model="Comment"
         placeholder="おたより"
       />
-      <button v-on:click="MakeComment()" class="MakeComment">
-        これでおっけー！
-      </button>
+
     </div>
+    <button v-on:click="MakeComment()" class="MakeComment">
+      これでおっけー！
+    </button>
+
     <div class="Search">
       <input
         type="text"
@@ -44,7 +50,7 @@
         placeholder="キーワード"
       />
       <button v-on:click="SearchComment()" class="searchComment">
-        おたよりをさがす(将来用)
+        おたよりをさがす
       </button>
       <div v-for="(result, index) in results" :key="index" class="CommentBox">
         <div class="info">
@@ -70,20 +76,24 @@
       <div class="Comment">{{ comment.Comment }}</div>
     </div>
   </div>
-</template>
 
+</template>
 <script>
-import firebase from "firebase"
+import firebase from "firebase";
+
 export default {
   data() {
     return {
       comments: [],
+
       results: [],
+
       CommentId: "",
       Title: "",
       auther: "",
       time: "",
       Comment: "",
+
       keyword: "",
     }
   },
@@ -121,19 +131,23 @@ export default {
       }/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
       const id = this.comments.length
       const res = confirm("投稿しても大丈夫？")
+
       if (res === true) {
         firebase
           .firestore()
           .collection("comments")
+
           .doc()
           .add({
             CommentId: id,
+
             Title: this.Title,
             auther: this.auther,
             time: Time,
             Comment: this.Comment,
           })
           .then(() => {
+
             alert("コメントできました！")
             this.Title = ""
             this.auther = ""
@@ -165,6 +179,7 @@ export default {
   },
 
   created: function () {
+
     firebase
       .firestore()
       .collection("comments")
@@ -172,6 +187,7 @@ export default {
       .then((docs) => {
         // success
         // if (docs.exists) {
+
         console.log(docs)
         docs.forEach((doc) => {
           this.comments.push(doc.data())
@@ -186,6 +202,9 @@ export default {
       })
   },
 }
+
+        
+     
 </script>
 
 <style scoped>
@@ -230,16 +249,20 @@ button {
 .inTitle {
   color: rgb(7, 17, 17);
   margin: 25px;
+
   justify-content: center;
   height: 30px;
   width: 70%;
+
 }
 .inAuther {
   color: rgb(7, 17, 17);
   margin: 25px;
+
   justify-content: center;
   height: 30px;
   width: 70%;
+
 }
 .inComment {
   justify-content: center;

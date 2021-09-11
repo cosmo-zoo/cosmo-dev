@@ -2,17 +2,21 @@
   <div>
     <div v-if="(isSignIn = true)" id="app">
       <div id="nav">
-        |<router-link to="/thred">掲示板</router-link>|
-        <!-- <router-link to="/index">授業情報検索</router-link>|
-        <router-link to="/about">授業評価入力</router-link>| -->
-        <router-link to="/signin">ログイン</router-link>|
+        welcome to NARAK
+        <p>Click to Start</p>
+      </router-link>
+      <router-link to="/Home"></router-link>
+      <router-link to="/About"></router-link>
+      <router-link to="/SignUp"></router-link>
+      <router-link to="/signin"></router-link>
+      <router-link to="/thred"></router-link>
       </div>
       <router-view />
     </div>
     <div v-else>
       <div>ログインしてください</div>
       <router-link to="/signin">ログイン画面はこちら</router-link>
-    </div>
+
   </div>
 </template>
 <script>
@@ -36,6 +40,11 @@ export default {
   },
 }
 </script>
+
+
+=======
+
+
 
 <style>
 #app {

@@ -1,7 +1,8 @@
 <template>
   <div class="signin">
     <h1>サインイン</h1>
-    <input type="text" placeholder="ユーザ名" v-model="username" />
+
+    <input type="email" placeholder="メールアドレス" v-model="email" />
     <input type="password" placeholder="パスワード" v-model="password" />
     <button @click="signIn">サインイン</button>
     <p>
@@ -19,24 +20,22 @@ import firebase from "firebase"
 export default {
   name: "Signin",
   data() {
+
     return [
       {
-        username: "",
+        email: "",
         password: "",
         isSignIn: false,
-      },
-      {
-        username: "sawa.may.29@gmail.com",
-        password: "humster",
-        isSignIn: false,
-      },
+      }
     ]
+
+    
   },
   methods: {
     signIn: function () {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.username, this.password)
+        .signInWithEmailAndPassword(this.email, this.password)
         .then(
           (accounts) => {
             alert("サインイン成功です。")
@@ -44,6 +43,7 @@ export default {
             console.log("success", accounts)
             this.isSignIn = true
           },
+
           (error) => {
             alert(error.message)
           }

@@ -1,9 +1,9 @@
 import firebase from "firebase"
 import "firebase/firestore"
 
+import "firebase/auth"
+
 const firebaseConfig = {
-  // ...
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   apiKey: "AIzaSyCZXWQvko8taTmipnbg43HXKWRWLfpsYeQ",
   authDomain: "cosmo-zoo.firebaseapp.com",
   projectId: "cosmo-zoo",
