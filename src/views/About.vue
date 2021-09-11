@@ -1,4 +1,6 @@
+// 検索・表示用
 <template>
+
   <!--授業検索-->
   <div class="Search">
     <header>

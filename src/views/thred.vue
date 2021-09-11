@@ -1,40 +1,42 @@
 // 掲示板
 <template>
-  <div>
-    <!-- ここからたぬきが乱入 -->
-    <div id="container">
-      <button v-on:click="home" id="item">ホーム</button>
-      <button v-on:click="search" id="item">授業検索</button>
-      <button v-on:click="eval" id="item">授業評価</button>
-      <!-- 掲示板を導入する -->
-      <button v-on:click="thred" id="item">掲示板</button>
-    </div>
-    <!-- ここまでたぬきが乱入 -->
+
+  <div v-if="(isSignIn = true)">
+
     <div class="header">
       <div>ひとの わるぐちは かかないでね</div>
       <div>こじんが とくてい される ような ことは かかないでね</div>
     </div>
     <div class="Make">
-      <div class="title-auther">
-        <input
-          type="text"
-          class="inTitle"
-          v-model="Title"
-          placeholder="たいとる"
-        />
-        <input
-          type="text"
-          class="inAuther"
-          v-model="auther"
-          placeholder="かいたひと"
-        />
+
+      <!-- ここからたぬきが乱入 -->
+      <div id="container">
+        <button v-on:click="home" id="item">ホーム</button>
+        <button v-on:click="search" id="item">授業検索</button>
+        <button v-on:click="eval" id="item">授業評価</button>
+        <!-- 掲示板を導入する -->
+        <button v-on:click="thred" id="item">掲示板</button>
       </div>
+      <input
+        type="text"
+        class="inTitle"
+        v-model="Title"
+        placeholder="たいとる"
+      />
+      <input
+        type="text"
+        class="inAuther"
+        v-model="auther"
+        placeholder="かいたひと"
+      />
+
       <textarea
         type="text"
         class="inComment"
         v-model="Comment"
         placeholder="おたより"
       />
+
     </div>
     <button v-on:click="MakeComment()" class="MakeComment">
       これでおっけー！
@@ -48,7 +50,7 @@
         placeholder="キーワード"
       />
       <button v-on:click="SearchComment()" class="searchComment">
-        おたよりをさがす(将来用)
+        おたよりをさがす
       </button>
       <div v-for="(result, index) in results" :key="index" class="CommentBox">
         <div class="info">
@@ -74,104 +76,110 @@
       <div class="Comment">{{ comment.Comment }}</div>
     </div>
   </div>
-  <!-- </div> -->
-</template>
 
+</template>
 <script>
 import firebase from "firebase";
+
 export default {
   data() {
     return {
       comments: [],
-      result: [],
+
+      results: [],
+
       CommentId: "",
       Title: "",
       auther: "",
       time: "",
       Comment: "",
-    };
+
+      keyword: "",
+    }
   },
   methods: {
-    // ここからたぬきが乱入
     /*ホームに飛ぶ関数*/
-    home: function() {
-      location.href = "Home";
-      location.herf = "/";
+    home: function () {
+      location.href = "Home"
     },
     /*掲示板のページに飛ぶ関数*/
-    thred: function() {
-      location.href = "thred";
+    thred: function () {
+      location.href = "thred"
     },
 
     /*新規登録ページに飛ぶ関数*/
-    signup: function() {
-      location.href = "SignUp";
+    signup: function () {
+      location.href = "SignUp"
     },
     /*ログインページに飛ぶ関数*/
-    login: function() {
-      location.href = "SignIn";
+    login: function () {
+      location.href = "SignIn"
     },
     /*検索ページに飛ぶ関数*/
-    search: function() {
-      location.href = "About";
+    search: function () {
+      location.href = "About"
     },
     /*評価ページに飛ぶ関数*/
-    eval: function() {
-      location.href = "About";
+    eval: function () {
+      location.href = "About"
     },
-    //ここまでたぬきが乱入
-
     MakeComment() {
       // OKなら移動
-      const now = firebase.firestore.Timestamp.now();
-      const Time = `${now.getFullYear()}/${now.getMonth() +
-        1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-      const id = this.comments.length;
-      const number = String(id);
-      const res = confirm("投稿しても大丈夫？");
+      const now = firebase.firestore.Timestamp.now()
+      const Time = `${now.getFullYear()}/${
+        now.getMonth() + 1
+      }/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+      const id = this.comments.length
+      const res = confirm("投稿しても大丈夫？")
+
       if (res === true) {
         firebase
           .firestore()
           .collection("comments")
-          .doc(id)
-          .set({
-            CommentId: number,
+
+          .doc()
+          .add({
+            CommentId: id,
+
             Title: this.Title,
             auther: this.auther,
             time: Time,
             Comment: this.Comment,
           })
           .then(() => {
-            alert("コメントできました！");
-            this.Title = "";
-            this.auther = "";
-            this.Comment = "";
+
+            alert("コメントできました！")
+            this.Title = ""
+            this.auther = ""
+            this.Comment = ""
             // success
           })
           .catch((error) => {
-            console.log("Error", error);
+            console.log("Error", error)
             // error
-          });
+          })
       } else {
-        alert("コメントしませんでした！");
+        alert("コメントしませんでした！")
+      }
+    },
+    SearchComment() {
+      // Declare variables
+      // let c = 0
+
+      // Loop through all list items, and hide those who don't match the search query
+      for (let i = 0; i < this.comments.length; i++) {
+        let key = this.comments[i]
+        let n = key.Comment.indexOf(this.keyword, 0)
+        if (n !== -1) {
+          // this.results[c] = this.comments[i]
+          this.results.push(this.comments[i])
+        }
       }
     },
   },
-  SearchComment() {
-    // Declare variables
-    let c = 0;
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (let i = 0; i < this.comments.length; i++) {
-      let key = this.comments.Comment;
-      let n = key.indexOf(this.keyword);
-      if (n !== -1) {
-        this.result[c] = this.comments[i];
-        c = c + 1;
-      }
-    }
-  },
-  created: function() {
+  created: function () {
+
     firebase
       .firestore()
       .collection("comments")
@@ -179,20 +187,24 @@ export default {
       .then((docs) => {
         // success
         // if (docs.exists) {
-        console.log(docs);
+
+        console.log(docs)
         docs.forEach((doc) => {
-          this.comments.push(doc.data());
-          console.log(doc.data());
-        });
+          this.comments.push(doc.data())
+          console.log(doc.data())
+        })
         // }
-        console.log(this.comments);
+        console.log(this.comments)
       })
       .catch((error) => {
-        console.log("Error getting document:", error);
+        console.log("Error getting document:", error)
         // error
-      });
+      })
   },
-};
+}
+
+        
+     
 </script>
 
 <style scoped>
@@ -237,16 +249,20 @@ button {
 .inTitle {
   color: rgb(7, 17, 17);
   margin: 25px;
-  margin-left: 20%;
+
+  justify-content: center;
   height: 30px;
-  width: 100%;
+  width: 70%;
+
 }
 .inAuther {
   color: rgb(7, 17, 17);
   margin: 25px;
-  margin-right: 20%;
+
+  justify-content: center;
   height: 30px;
-  width: 100%;
+  width: 70%;
+
 }
 .inComment {
   justify-content: center;

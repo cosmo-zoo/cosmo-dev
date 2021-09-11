@@ -1,4 +1,5 @@
 <template>
+
   <!--サインイン後のホーム画面-->
   <div class="Home">
 
