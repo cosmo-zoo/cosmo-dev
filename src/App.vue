@@ -1,17 +1,32 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/signup">サインアップ</router-link> |
-      <router-link to="/signin">サインイン</router-link> |
+
+  
+      <router-link to="/Home">
+        welcome to NARAK
+        <p>Click to Start</p>
+      </router-link>
+      <router-link to="/Home"></router-link>
+      <router-link to="/About"></router-link>
+      <router-link to="/SignUp"></router-link>
+      <router-link to="/SignIn"></router-link>
+      <router-link to="/thred"></router-link>
+=======
+   
       <router-link to="/success">ログイン成功</router-link> |
       <router-link to="/">講義評価</router-link> |
-      <router-link to="/about">講義検索</router-link>
+      
+
     </div>
     <router-view />
   </div>
 </template>
 
-<script></script>
+
+=======
+
+
 
 <style>
 #app {
