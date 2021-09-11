@@ -14,7 +14,7 @@
       <img v-bind:href="imgPath" src="@/assets/img/logo.png" alt="logo" />
 
       <div id="container">
-        <button v-on:click="home" id="item">ホーム</button>
+        <!-- <button v-on:click="home" id="item">ホーム</button> -->
         <button v-on:click="search" id="item">授業検索</button>
         <button v-on:click="eval" id="item">授業評価</button>
         <!-- 掲示板を導入する -->

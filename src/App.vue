@@ -6,12 +6,16 @@
       <router-link to="/SignUp">SignUp</router-link> |
       <router-link to="/SignIn">SignIn</router-link> | -->
 
-      <router-link to="/"></router-link>
+      <router-link to="/Home">
+        welcome to NARAK
+        <p>Click to Start</p>
+      </router-link>
+      <router-link to="/Home"></router-link>
       <router-link to="/About"></router-link>
       <router-link to="/SignUp"></router-link>
       <router-link to="/SignIn"></router-link>
       <!-- 掲示板 -->
-      <router-link to="/thred">A</router-link>
+      <router-link to="/thred"></router-link>
     </div>
     <router-view />
   </div>

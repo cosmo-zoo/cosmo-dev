@@ -96,6 +96,7 @@ export default {
     /*ホームに飛ぶ関数*/
     home: function() {
       location.href = "Home";
+      location.herf = "/";
     },
     /*掲示板のページに飛ぶ関数*/
     thred: function() {
