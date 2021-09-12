@@ -20,16 +20,13 @@ import firebase from "firebase"
 export default {
   name: "Signin",
   data() {
-
     return [
       {
         email: "",
         password: "",
         isSignIn: false,
-      }
+      },
     ]
-
-    
   },
   methods: {
     signIn: function () {

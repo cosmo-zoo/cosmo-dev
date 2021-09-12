@@ -5,8 +5,12 @@
 
     <div id="container">
       <!-- <button v-on:click="home" id="item">ホーム</button> -->
-      <button id="item">授業検索</button>
-      <button id="item">授業評価</button>
+      <a href="#box1" v-smooth-scroll="{ duration: 1000, offset: 50 }"
+        ><button id="item">授業検索</button></a
+      >
+      <a href="#box2" v-smooth-scroll="{ duration: 1000, offset: 50 }"
+        ><button id="item">授業評価</button></a
+      >
       <!-- 掲示板を導入する -->
       <button v-on:click="thred" id="item">掲示板</button>
     </div>
@@ -14,7 +18,7 @@
     <!--  -->
     <!-- <div>新着授業評価情報</div> -->
 
-    <div class="hyotei">
+    <div class="hyotei" id="box1">
       <div class="ui-container">
         <div class="ui header">
           <!-- <div class="content">授業を評定する</div> -->
@@ -212,7 +216,7 @@
           <button v-on:click="submit" class="form-submit-button">送信</button>
         </form>
       </div>
-      <div class="about">
+      <div class="about" id="box2">
         <div class="ui header">
           <!-- <div class="content">授業を検索する</div> -->
           <div class="sub header">
@@ -381,24 +385,29 @@
         </p>
       </div> -->
       </div>
-      <div class="result">検索結果</div>
-      <div
-        v-for="(information2, index) in information2"
-        :key="index"
-        class="information2box"
-      >
-        <div>{{ information2.subject }}</div>
-        <p>
-          教員名：{{ information2.teacher }}<br />
-          科目区分：{{ information2.kamoku }}<br />
-          年度/開講時期：{{ information2.year }}/{{ information2.season }}<br />
-          採点方法：{{ information2.checkedNames }}<br />
-          単位取得難易度：{{ information2.picked }}<br />
-          コメント：{{ information2.text }}
-        </p>
+      <div class="result2">
+        <div class="result">検索結果</div>
+        <div
+          v-for="(information2, index) in information2"
+          :key="index"
+          class="information2box"
+        >
+          <div>{{ information2.subject }}</div>
+          <p>
+            教員名：{{ information2.teacher }}<br />
+            科目区分：{{ information2.kamoku }}<br />
+            年度/開講時期：{{ information2.year }}/{{ information2.season
+            }}<br />
+            採点方法：{{ information2.checkedNames }}<br />
+            単位取得難易度：{{ information2.picked }}<br />
+            コメント：{{ information2.text }}
+          </p>
+        </div>
       </div>
       <footer>
-        <p>copyright 2021 cosmo-zoo</p>
+        <div>
+          <p>copyright 2021 cosmo-zoo</p>
+        </div>
       </footer>
     </div>
   </div>
@@ -420,6 +429,7 @@ export default {
       information: [],
       information2: [],
       kennsaku: "",
+      //results: [],
     }
   },
   /*ログインボタンの表示の切り替え*/
@@ -447,21 +457,31 @@ export default {
         })
       }
     },
+    // kennsaku2() {
+    //   console.log(this.kennsaku)
+    //   firebase
+    //     .firestore()
+    //     .collection("user")
+    //     .where("subject", "==", this.kennsaku)
+    //     .get()
+    //     .then((docs) => {
+    //       // success
+    //       docs.forEach((doc) => {
+    //         console.log(doc.data())
+    //         this.information2.push(doc.data())
+    //       })
+    //       console.log(docs)
+    //     })
+    // },
     kennsaku2() {
-      console.log(this.kennsaku)
-      firebase
-        .firestore()
-        .collection("user")
-        .where("subject", "==", this.kennsaku)
-        .get()
-        .then((docs) => {
-          // success
-          docs.forEach((doc) => {
-            console.log(doc.data())
-            this.information2.push(doc.data())
-          })
-          console.log(docs)
-        })
+      for (let i = 0; i < this.information.length; i++) {
+        let key = this.information[i]
+        let n = key.subject.indexOf(this.kennsaku, 0)
+        let m = key.teacher.indexOf(this.kennsaku, 0)
+        if (n !== -1 || m !== -1) {
+          this.information2.push(this.information[i])
+        }
+      }
     },
     /*ボタンの色変更*/
     color1: function () {
@@ -520,7 +540,7 @@ export default {
 </script>
 
 <style scoped>
-.informationbox {
+.information2box {
   float: left;
   width: 200px;
 }
@@ -722,6 +742,10 @@ export default {
 .label2 {
   font-size: 20px;
 }
+.result {
+  padding-top: 10px;
+  font-size: 20px;
+}
 .field2 {
   padding: 0px 15px 15px 15px;
 }
@@ -758,6 +782,32 @@ export default {
   font-size: 15px;
 }
 .about:after {
+  background: none;
+  border: 1px solid #000000; /* 線の太さ・種類・色 */
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+}
+.information2box {
+  font-family: "Hiragino Sans", "ヒラギノ角ゴシック", "メイリオ", Meiryo,
+    "ＭＳ Ｐゴシック", "MS PGothic" "ＭＳ ゴシック", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
+  /* border-left: double 7px #000000;
+  border-right: double 7px #000000; */
+  background: none;
+  border: 1px solid #000000; /* 線の太さ・種類・色 */
+  margin: 10px; /* 外側の余白 */
+  padding: 20px; /* 内側の余白 */
+  position: relative;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 15px;
+}
+.information2box:after {
   background: none;
   border: 1px solid #000000; /* 線の太さ・種類・色 */
   content: "";
