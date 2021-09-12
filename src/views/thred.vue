@@ -1,22 +1,24 @@
 // 掲示板
 <template>
-
   <div v-if="(isSignIn = true)">
-
+    <div id="container">
+      <router-view />
+      <router-link to="/Home" id="button"
+        ><button v-on:click="eval" id="item">授業評価</button>
+      </router-link>
+      <router-link to="/Home" id="button"
+        ><button v-on:click="search" id="item">授業検索</button>
+      </router-link>
+      <router-link to="/thred" id="button"
+        ><button v-on:click="thred" id="item">掲示板</button>
+      </router-link>
+    </div>
     <div class="header">
       <div>ひとの わるぐちは かかないでね</div>
       <div>こじんが とくてい される ような ことは かかないでね</div>
     </div>
     <div class="Make">
-
       <!-- ここからたぬきが乱入 -->
-      <div id="container">
-        <button v-on:click="home" id="item">ホーム</button>
-        <button v-on:click="search" id="item">授業検索</button>
-        <button v-on:click="eval" id="item">授業評価</button>
-        <!-- 掲示板を導入する -->
-        <button v-on:click="thred" id="item">掲示板</button>
-      </div>
       <input
         type="text"
         class="inTitle"
@@ -36,7 +38,6 @@
         v-model="Comment"
         placeholder="おたより"
       />
-
     </div>
     <button v-on:click="MakeComment()" class="MakeComment">
       これでおっけー！
@@ -76,10 +77,9 @@
       <div class="Comment">{{ comment.Comment }}</div>
     </div>
   </div>
-
 </template>
 <script>
-import firebase from "firebase";
+import firebase from "firebase"
 
 export default {
   data() {
@@ -117,15 +117,16 @@ export default {
     },
     /*検索ページに飛ぶ関数*/
     search: function () {
-      location.href = "About"
+      location.href = "Home"
     },
     /*評価ページに飛ぶ関数*/
     eval: function () {
-      location.href = "About"
+      location.href = "Home"
     },
     MakeComment() {
       // OKなら移動
-      const now = firebase.firestore.Timestamp.now()
+      const now2 = firebase.firestore.Timestamp.now()
+      const now = now2.toDate()
       const Time = `${now.getFullYear()}/${
         now.getMonth() + 1
       }/${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
@@ -136,8 +137,6 @@ export default {
         firebase
           .firestore()
           .collection("comments")
-
-          .doc()
           .add({
             CommentId: id,
 
@@ -147,7 +146,6 @@ export default {
             Comment: this.Comment,
           })
           .then(() => {
-
             alert("コメントできました！")
             this.Title = ""
             this.auther = ""
@@ -179,7 +177,6 @@ export default {
   },
 
   created: function () {
-
     firebase
       .firestore()
       .collection("comments")
@@ -202,9 +199,6 @@ export default {
       })
   },
 }
-
-        
-     
 </script>
 
 <style scoped>
@@ -253,7 +247,6 @@ button {
   justify-content: center;
   height: 30px;
   width: 70%;
-
 }
 .inAuther {
   color: rgb(7, 17, 17);
@@ -262,7 +255,6 @@ button {
   justify-content: center;
   height: 30px;
   width: 70%;
-
 }
 .inComment {
   justify-content: center;

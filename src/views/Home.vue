@@ -6,10 +6,10 @@
     <div id="container">
       <!-- <button v-on:click="home" id="item">ホーム</button> -->
       <a href="#box1" v-smooth-scroll="{ duration: 1000, offset: 50 }"
-        ><button id="item">授業検索</button></a
+        ><button id="item">授業評価</button></a
       >
       <a href="#box2" v-smooth-scroll="{ duration: 1000, offset: 50 }"
-        ><button id="item">授業評価</button></a
+        ><button id="item">授業検索</button></a
       >
       <!-- 掲示板を導入する -->
       <button v-on:click="thred" id="item">掲示板</button>
